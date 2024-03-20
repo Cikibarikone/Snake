@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI difficultyText;
     [SerializeField] private Slider difficultyModSlider;
     [SerializeField] private Button startButton;
+    [SerializeField] private Button exitButton;
+
 
     private void Awake()
     {
@@ -39,12 +41,20 @@ public class GameManager : MonoBehaviour
 
         startButton.onClick.RemoveAllListeners();
         startButton.onClick.AddListener(StartGame);
+
+        exitButton.onClick.RemoveAllListeners();
+        exitButton.onClick.AddListener(ExitGame);
     }
 
     public void StartGame()
     {
         PlayerPrefs.SetInt("Difficulty", DifficultyMod);
         SceneManager.LoadScene("SnakeScene");
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     private void UpdateDifficultyText(float value)
